@@ -10,3 +10,10 @@ A saída pode ser html também.
 Sistemas que utilizam (vão utilizar):
 - atestados da EESC;
 - Consulta sefaz (NFE-WS);
+
+## Exemplos
+
+- Atestado de consulta a certdões negativas
+- Oficio de convite para banca de PG
+- Certificado de participação em evento
+- etc
