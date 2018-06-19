@@ -1,7 +1,7 @@
 {
-  "name": "uspdev/pdfgenerator",
+  "name": "uspdev/pdfgen",
   "description": "Cria arquivos pdf a partir de template e dados",
-  "homepage": "https://github.com/uspdev/pdfgenerator",
+  "homepage": "https://github.com/uspdev/pdfgen",
   "type": "library",
   "license": "GPL-2.0-or-later",
   "authors": [
