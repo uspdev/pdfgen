@@ -1,3 +1,7 @@
+# Aviso
+
+Esta biblioteca ainda está em desenvolvimento. Ocorrerão mudanças mas chamadas de métodos que podem tornar incompatível com instalações previas.
+
 # pdfgen
 
 Biblioteca para geração de documentos pdf a partir de templates
@@ -14,7 +18,7 @@ Sistemas que utilizam (vão utilizar):
 
 ## Exemplos
 
-- Atestado de consulta a certdões negativas
+- Atestado de consulta a certidões negativas
 - Oficio de convite para banca de PG
 - Certificado de participação em evento
 - etc
