@@ -5,7 +5,7 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 require_once 'data.php';
 
 $pdf = new Uspdev\Pdfgen\Pdfgen();
-$pdf->setTemplate("pos_oficio_membro_banca.tpl");
+$pdf->setTemplate("oficio.tpl");
 
 $pdf->setHeaderImg('logo_eesc_horizontal_com_assinatura.png', 50);
 $pdf->setFooter($footer);
