@@ -143,7 +143,7 @@ namespace Uspdev\Pdfgen {
             if (!empty($cfg)) {
                 $page_orientation = $cfg['pdf_page_orientation'];
             } else {
-                $page_orientation = 'L';
+                $page_orientation = 'P';
             }
 
             $pdf = new Mypdf($page_orientation, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
