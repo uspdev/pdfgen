@@ -7,6 +7,9 @@ namespace Uspdev\Pdfgen {
 
     class Pdfgen
     {
+
+        private $imgs = [];
+
         public function setTemplate($tpl)
         {
             $this->tpl = $tpl;
@@ -41,6 +44,11 @@ namespace Uspdev\Pdfgen {
         {
             $this->footerImg = $img;
             $this->footerImgWidth = $width;
+        }
+
+        public function putImg($img, $x, $y, $w)
+        {
+            $this->imgs[] = ['img' => $img, 'w' => $w, 'x' => $x, 'y' => $y];
         }
 
         public function parse()
@@ -126,24 +134,30 @@ namespace Uspdev\Pdfgen {
             return $html;
         }
 
-        public function pdfBuild($dest = 'I')
+        public function pdfBuild($dest = 'I', $cfg = [])
         {
             if (empty($this->html)) {
                 $this->parse();
             }
 
-            $pdf = new Mypdf(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+            if (!empty($cfg)) {
+                $page_orientation = $cfg['pdf_page_orientation'];
+            } else {
+                $page_orientation = 'L';
+            }
+
+            $pdf = new Mypdf($page_orientation, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
             $pdf->SetMargins(20, 30, 20); //PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT
 
-            if ($this->headerImg) {
+            if (!empty($this->headerImg)) {
                 $pdf->SetHeaderData($this->headerImg, $this->headerImgWidth); //logo, width
                 $pdf->SetHeaderMargin(10); // diferente do padrão
             } else {
                 $pdf->setPrintHeader(false);
             }
 
-            if ($this->footer) {
+            if (!empty($this->footer)) {
                 $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', 6));
                 $pdf->setFooterData(array(128, 128, 128), array(128, 128, 128)); // text color, line color
 
@@ -155,6 +169,13 @@ namespace Uspdev\Pdfgen {
 
             $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO); // se não setar o pdf fica esticado (com mais espaço entre linhas)
             $pdf->AddPage();
+
+
+            foreach ($this->imgs as $img) {
+                $pdf->Image($img['img'], $img['x'],$img['y'],$img['w']);
+            }
+
+            //$pdf->setXY(0,0);
             $pdf->writeHTML($this->html, true, 0, true, 0);
             $pdf->Output('document.pdf', $dest);
         }
