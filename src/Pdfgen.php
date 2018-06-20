@@ -46,9 +46,19 @@ namespace Uspdev\Pdfgen {
             $this->footerImgWidth = $width;
         }
 
+        /**
+         * Posiciona uma figura no documento pdf
+         * @param string $img nome do arquivo
+         * @param int $x coordenada x da imagem (em mm)
+         * @param int $y coordenada y da imagem (em mm)
+         * @param int $w largura da imagem (em mm)
+         * A altura é calculada automaticamente
+         * Se o papel for Landscape, x e y são invertidos
+         * @return void
+         */
         public function putImg($img, $x, $y, $w)
         {
-            $this->imgs[] = ['img' => $img, 'w' => $w, 'x' => $x, 'y' => $y];
+            $this->imgs[] = ['img' => $img, 'x' => $x, 'y' => $y, 'w' => $w];
         }
 
         public function parse()
@@ -143,7 +153,7 @@ namespace Uspdev\Pdfgen {
             if (!empty($cfg)) {
                 $page_orientation = $cfg['pdf_page_orientation'];
             } else {
-                $page_orientation = 'L';
+                $page_orientation = 'P';
             }
 
             $pdf = new Mypdf($page_orientation, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
@@ -172,7 +182,7 @@ namespace Uspdev\Pdfgen {
 
 
             foreach ($this->imgs as $img) {
-                $pdf->Image($img['img'], $img['x'],$img['y'],$img['w']);
+                $pdf->Image($img['img'], $img['x'], $img['y'], $img['w']);
             }
 
             //$pdf->setXY(0,0);
