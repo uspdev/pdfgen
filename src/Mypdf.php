@@ -3,7 +3,7 @@
 namespace Uspdev\Pdfgen {
 
 
-    class Mypdf extends \TCPDF
+    class Mypdf extends \setasign\Fpdi\TcpdfFpdi
     {
         public function Header()
         {
