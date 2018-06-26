@@ -16,7 +16,7 @@
 <p></p>
 <p></p>
 <p></p>
-<p style="text-align:right">São Carlos, 16 de agosto de 2018.</p>
+<p style="text-align:right;">São Carlos, 16 de agosto de 2018. &nbsp; &nbsp;</p>
 <p></p>
 <p></p>
 <p></p>

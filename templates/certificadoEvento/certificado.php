@@ -13,6 +13,7 @@ $pdf->putImg('assinatura_armando.jpg','63','165','40');
 $pdf->putImg('assinatura_luiz.png','192','167','40');
 
 $pdf->setData($data);
+$pdf->setBackground('template.pdf');
 
 /*echo $pdf->getHTML();
 exit;*/

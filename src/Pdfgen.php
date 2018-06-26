@@ -15,6 +15,11 @@ namespace Uspdev\Pdfgen {
             $this->tpl = $tpl;
         }
 
+        public function setBackground($pdf)
+        {
+            $this->bgPdf = $pdf;
+        }
+
         /*
          * @param array() $data É um array contendo objetos ou arrays associativos
          * se for objeto coloca direto no template
@@ -111,8 +116,9 @@ namespace Uspdev\Pdfgen {
             return $this->html;
         }
 
-        public
-        function getHTML()
+        // ao invés de gerar um pdf retorna uma string html
+        // similar ao pdf.
+        public function getHTML()
         {
             if (empty($this->html)) {
                 $this->parse();
@@ -180,12 +186,18 @@ namespace Uspdev\Pdfgen {
             $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO); // se não setar o pdf fica esticado (com mais espaço entre linhas)
             $pdf->AddPage();
 
+            // nesse caso coloca o pdf como brackground somente na página 1.
+            if (!empty($this->bgPdf)) {
+                $pdf->setSourceFile($this->bgPdf);
+                $tplId = $pdf->importPage(1);
+                // use the imported page and place it at point 10,10 with a width of 100 mm
+                $pdf->useTemplate($tplId);
+            }
 
             foreach ($this->imgs as $img) {
                 $pdf->Image($img['img'], $img['x'], $img['y'], $img['w']);
             }
 
-            //$pdf->setXY(0,0);
             $pdf->writeHTML($this->html, true, 0, true, 0);
             $pdf->Output('document.pdf', $dest);
         }
