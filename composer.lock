@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "b677cbecaa3db66dae37b8f0bf71e63f",
+    "content-hash": "3bd853fbbe311255aa540a4b8ac53aef",
     "packages": [
         {
             "name": "raelgc/template",
@@ -179,7 +179,8 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.3.0"
+        "php": ">=5.3.0",
+        "ext-imagick": "*"
     },
     "platform-dev": []
 }
