@@ -71,21 +71,6 @@ namespace Uspdev\Pdfgen {
             $tpl = new \raelgc\view\Template($this->tpl);
 
             foreach ($this->data as $k => $prop) {
-                /*                switch ($prop) {
-                                    case is_object($prop):
-                                        $tpl->$k = $prop;
-                                        break;
-                                    case (is_array($prop) && substr($k, 0, 6) == 'bloco_'):
-                                        $obj = substr($k, 6);
-                                        foreach ($prop as $val) {
-                                            $tpl->$obj = $val;
-                                            $tpl->block($k);
-                                        }
-                                        break;
-                                    default:
-                                        $tpl->$k = $prop;
-                                        break;
-                                }*/
                 if (is_object($prop)) {
                     $tpl->$k = $prop;
                 }
@@ -147,7 +132,20 @@ namespace Uspdev\Pdfgen {
                 $html = $dom->saveHTML();
             }
 
-            return $html;
+            return $html;// dados
+        }
+
+        public function getPNG()
+        {
+            if (empty($this->html)) {
+                $this->parse();
+            }
+            $image = new \IMagick();
+            $image->setBackgroundColor(new \ImagickPixel('transparent'));
+            $image->readImageBlob($this->html);
+            $image->setImageFormat("png32");
+            return $image->getImageBlob();
+
         }
 
         public function pdfBuild($dest = 'I', $cfg = [])
@@ -174,7 +172,7 @@ namespace Uspdev\Pdfgen {
             }
 
             if (!empty($this->footer)) {
-                $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', 6));
+                $pdf->setFooterFont(array(PDF_FONT_NAME_DATA, '', 6));
                 $pdf->setFooterData(array(128, 128, 128), array(128, 128, 128)); // text color, line color
 
                 $pdf->mySetFooterData($this->footerImg, $this->footerImgWidth, $this->footer);
@@ -208,16 +206,28 @@ namespace {
 
     function sexo($sexo, $m, $f)
     {
-        if (strtolower($sexo) == 'm') return $m;
-        if (strtolower($sexo) == 'f') return $f;
+        if (strtolower($sexo) == 'm') {
+            return $m;
+        }
+
+        if (strtolower($sexo) == 'f') {
+            return $f;
+        }
+
         return '';
     }
 
     function tipo($tipo, $m, $d) // mestrado ou doutorado
+
     {
-        if (strtolower($tipo) == 'm') return $m;
-        if (strtolower($tipo) == 'd') return $d;
+        if (strtolower($tipo) == 'm') {
+            return $m;
+        }
+
+        if (strtolower($tipo) == 'd') {
+            return $d;
+        }
+
         return '';
     }
 }
-
