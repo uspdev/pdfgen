@@ -132,7 +132,7 @@ namespace Uspdev\Pdfgen {
                 $html = $dom->saveHTML();
             }
 
-            return $html;// dados
+            return $html; //dados
         }
 
         public function getPNG()
@@ -142,7 +142,8 @@ namespace Uspdev\Pdfgen {
             }
             $image = new \IMagick();
             $image->setBackgroundColor(new \ImagickPixel('transparent'));
-            $image->readImageBlob($this->html);
+            // para o caso de png precisa dessa string no inicio.
+            $image->readImageBlob('<?xml version="1.0" encoding="UTF-8" standalone="no"?>' . $this->html);
             $image->setImageFormat("png32");
             return $image->getImageBlob();
 
@@ -204,7 +205,7 @@ namespace Uspdev\Pdfgen {
 
 namespace {
 
-    function sexo($sexo, $m, $f)
+    public function sexo($sexo, $m, $f)
     {
         if (strtolower($sexo) == 'm') {
             return $m;
@@ -217,7 +218,7 @@ namespace {
         return '';
     }
 
-    function tipo($tipo, $m, $d) // mestrado ou doutorado
+    public function tipo($tipo, $m, $d) // mestrado ou doutorado
 
     {
         if (strtolower($tipo) == 'm') {
