@@ -19,8 +19,8 @@
   "require": {
     "php": ">=5.3.0",
     "ext-imagick": "*",
-    "tecnickcom/tcpdf": "dev-master",
-    "raelgc/template": "dev-master",
-    "setasign/fpdi": "dev-master"
+    "tecnickcom/tcpdf": "^6.2",
+    "raelgc/template": "^2.2",
+    "setasign/fpdi": "^2.2"
   }
 }
