@@ -205,7 +205,7 @@ namespace Uspdev\Pdfgen {
 
 namespace {
 
-    public function sexo($sexo, $m, $f)
+    function sexo($sexo, $m, $f)
     {
         if (strtolower($sexo) == 'm') {
             return $m;
@@ -218,7 +218,7 @@ namespace {
         return '';
     }
 
-    public function tipo($tipo, $m, $d) // mestrado ou doutorado
+    function tipo($tipo, $m, $d) // mestrado ou doutorado
 
     {
         if (strtolower($tipo) == 'm') {
